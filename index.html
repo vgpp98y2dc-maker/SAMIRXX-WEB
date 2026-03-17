@@ -15,56 +15,73 @@ body {
   overflow-x: hidden;
 }
 
-/* PARTÍCULAS */
+/* FONDO PARTÍCULAS */
 body::before {
   content: "";
   position: fixed;
   width: 100%;
   height: 100%;
-  background-image: radial-gradient(red 1px, transparent 1px);
-  background-size: 30px 30px;
-  animation: move 10s linear infinite;
-  opacity: 0.3;
+  background-image: radial-gradient(red 2px, transparent 2px);
+  background-size: 40px 40px;
+  animation: animar 8s linear infinite;
+  opacity: 0.4;
 }
 
-@keyframes move {
+@keyframes animar {
   from {transform: translateY(0);}
-  to {transform: translateY(100px);}
+  to {transform: translateY(200px);}
 }
 
 /* IMÁGENES */
 img {
-  width: 120px;
-  height: 120px;
+  width: 130px;
+  height: 130px;
   border-radius: 50%;
-  border: 3px solid red;
-  margin-top: 20px;
-  box-shadow: 0 0 20px red;
+  border: 4px solid red;
+  margin-top: 25px;
+  box-shadow: 0 0 25px red, 0 0 50px red;
 }
 
 /* TEXTO */
 h1 {
   color: red;
-  text-shadow: 0 0 10px red;
+  text-shadow: 0 0 10px red, 0 0 20px red;
 }
 
 /* BOTONES */
 .btn {
   display: block;
-  background: red;
+  background: linear-gradient(45deg, red, #ff3c3c);
   color: white;
-  padding: 15px;
-  margin: 10px auto;
-  width: 80%;
-  border-radius: 12px;
+  padding: 16px;
+  margin: 12px auto;
+  width: 85%;
+  border-radius: 15px;
   text-decoration: none;
-  box-shadow: 0 0 15px red;
+  box-shadow: 0 0 20px red;
   transition: 0.3s;
+  font-weight: bold;
 }
 
 .btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 25px red;
+  transform: scale(1.07);
+  box-shadow: 0 0 35px red, 0 0 60px red;
+}
+
+/* EFECTO LATIDO */
+@keyframes latido {
+  0% {transform: scale(1);}
+  50% {transform: scale(1.05);}
+  100% {transform: scale(1);}
+}
+
+.btn {
+  animation: latido 2s infinite;
+}
+
+/* ESPACIO ENTRE SECCIONES */
+.section {
+  margin-bottom: 40px;
 }
 </style>
 
@@ -72,23 +89,27 @@ h1 {
 
 <body>
 
-<img src="images/20260316210408.png">
-<h1>Samirxx</h1>
+<div class="section">
+  <img src="images/20260316210408.png">
+  <h1>Samirxx</h1>
 
-<a class="btn" href="#">WhatsApp</a>
-<a class="btn" href="#">PROXY IPHONE</a>
-<a class="btn" href="#">AIM DRAG</a>
-<a class="btn" href="#">AIM BODY</a>
+  <a class="btn" href="#">WhatsApp</a>
+  <a class="btn" href="#">PROXY IPHONE</a>
+  <a class="btn" href="#">AIM DRAG</a>
+  <a class="btn" href="#">AIM BODY</a>
+</div>
 
-<br><br>
+<div class="section">
+  <img src="images/20260316210415.png">
+  <h1>@47Renovado</h1>
 
-<img src="images/20260316210415.png">
-<h1>@47Renovado</h1>
+  <a class="btn" href="#">WhatsApp</a>
+  <a class="btn" href="#">AIMBOT CUELLO</a>
+  <a class="btn" href="#">HOLOGRAMA</a>
+  <a class="btn" href="#">BALAS MÁGICAS</a>
+</div>
 
-<a class="btn" href="#">WhatsApp</a>
-<a class="btn" href="#">AIMBOT CUELLO</a>
-<a class="btn" href="#">HOLOGRAMA</a>
-<a class="btn" href="#">BALAS MÁGICAS</a>
+<p style="opacity:0.5;">© 2026 Samirxx ⚡</p>
 
 </body>
 </html>
