@@ -30,56 +30,57 @@ canvas {
   position:relative;
   z-index:1;
   width:90%;
-  max-width:350px;
+  max-width:280px;
   margin:auto;
-  padding:20px 0;
+  padding:15px 0;
   text-align:center;
 }
 
 /* AVATAR */
 .avatar {
-  width:90px;
-  height:90px;
+  width:80px;
+  height:80px;
   border-radius:50%;
-  margin-bottom:10px;
+  margin-bottom:8px;
   border:2px solid rgba(255,50,50,0.8);
-  box-shadow:0 0 20px rgba(255,50,50,0.8);
+  box-shadow:0 0 15px rgba(255,50,50,0.8);
 }
 
 .avatar.small {
-  width:75px;
-  height:75px;
+  width:65px;
+  height:65px;
 }
 
 /* TEXTO */
 h1, .user2 {
-  font-size:22px;
+  font-size:20px;
   color:#ff4444;
   text-shadow:0 0 10px #ff4444;
   margin:5px 0;
+  font-weight:600;
 }
 
 p {
-  font-size:14px;
+  font-size:13px;
   color:#aaa;
-  margin-bottom:15px;
+  margin-bottom:10px;
 }
 
 /* SECCIONES */
 .section {
-  margin-top:25px;
+  margin-top:20px;
 }
 
 /* BOTONES */
 .link {
   display:block;
   background:linear-gradient(145deg,#ff5555,#ff2222);
-  padding:10px;
-  margin:6px 0;
+  padding:9px;
+  margin:5px 0;
   border-radius:10px;
   text-decoration:none;
   color:white;
-  font-size:14px;
+  font-size:13px;
   border:1px solid #ff4444;
   box-shadow:0 0 10px #ff5555;
   transition:0.2s;
@@ -91,7 +92,7 @@ p {
 
 /* FOOTER */
 .footer {
-  margin-top:25px;
+  margin-top:20px;
   font-size:12px;
   color:#666;
 }
@@ -104,6 +105,7 @@ p {
 
 <div class="container">
 
+  <!-- PERFIL 1 -->
   <img src="images/20260316210408.png" class="avatar">
   
   <h1>Samirxx</h1>
@@ -116,22 +118,22 @@ p {
     <a class="link" href="https://wa.me/526151160719?text=Quiero%20AIM%20BODY" target="_blank">AIM BODY</a>
   </div>
 
+  <!-- PERFIL 2 -->
   <div class="section">
-    <div class="profile-box">
+    <img src="images/20260316210415.png" class="avatar small">
+    
+    <p class="user2">@47Renovado</p>
 
-      <img src="images/20260316210415.png" class="avatar small">
-      
-      <p class="user2">@47Renovado</p>
+    <a class="link" href="https://wa.me/573025434258?text=Hola%20quiero%20info" target="_blank">WhatsApp</a>
+    <a class="link" href="https://wa.me/573025434258?text=Quiero%20AIMBOT%20CUELLO" target="_blank">AIMBOT CUELLO</a>
+    <a class="link" href="https://wa.me/573025434258?text=Quiero%20HOLOGRAMA" target="_blank">HOLOGRAMA</a>
+    <a class="link" href="https://wa.me/573025434258?text=Quiero%20BALAS%20MAGICAS" target="_blank">BALAS MÁGICAS</a>
 
-      <a class="link" href="https://wa.me/573025434258?text=Hola%20quiero%20info" target="_blank">WhatsApp</a>
-      <a class="link" href="https://wa.me/573025434258?text=Quiero%20AIMBOT%20CUELLO" target="_blank">AIMBOT CUELLO</a>
-      <a class="link" href="https://wa.me/573025434258?text=Quiero%20HOLOGRAMA" target="_blank">HOLOGRAMA</a>
-      <a class="link" href="https://wa.me/573025434258?text=Quiero%20BALAS%20MAGICAS" target="_blank">BALAS MÁGICAS</a>
-
-    </div>
+    <a class="link" href="next.html">Siguiente ➡️</a>
   </div>
 
   <div class="footer">© 2026 Samirxx ⚡</div>
+
 </div>
 
 <script>
@@ -146,7 +148,7 @@ window.addEventListener('resize', resizeCanvas);
 resizeCanvas();
 
 const particles = [];
-for(let i=0;i<120;i++){ // menos partículas = más ligero
+for(let i=0;i<120;i++){
   particles.push({
     x:Math.random()*canvas.width,
     y:Math.random()*canvas.height,
