@@ -3,143 +3,196 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Modificación XIT</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<title>MODIFICACIÓN XIT</title>
 
 <style>
+
 body{
-  margin:0;
-  font-family:'Inter',sans-serif;
-  background:#05060a;
-  color:white;
-  overflow:hidden;
+margin:0;
+font-family:Arial;
+background:#05060a;
+color:white;
+overflow:hidden;
 }
 
+/* FONDO */
 canvas{
-  position:fixed;
-  top:0;
-  left:0;
-  z-index:0;
+position:fixed;
+top:0;
+left:0;
+z-index:0;
+pointer-events:none;
 }
 
 /* CONTENEDOR */
 .container{
-  width:90%;
-  max-width:300px;
-  margin:auto;
-  text-align:center;
-  position:relative;
-  z-index:1;
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  padding-top:60px;
-  animation:fadeIn 1s ease;
+width:90%;
+max-width:280px;
+margin:auto;
+text-align:center;
+position:relative;
+z-index:1;
+padding-top:70px;
+animation:fadeIn 1s ease;
 }
 
-/* TITULO */
+/* 🔥 TITULO PRO */
 .title{
-  display:inline-block;
-  font-size:15px;
-  color:#00bfff;
-  position:relative;
-  margin-bottom:10px;
-  animation:glow 2s infinite alternate;
+font-size:17px;
+color:#00bfff;
+position:relative;
+display:inline-block;
+margin-bottom:30px;
+animation:glow 2s infinite alternate;
 }
 
-/* LINEA */
+/* LINEA SUPERIOR */
 .title::before{
-  content:"";
-  position:absolute;
-  bottom:-6px;
-  left:50%;
-  transform:translateX(-50%);
-  height:2px;
-  width:0%;
-  background:#00bfff;
-  animation:lineCenter 1s forwards;
+content:"";
+position:absolute;
+top:-10px;
+left:50%;
+transform:translateX(-50%);
+width:0%;
+height:2px;
+background:#00bfff;
+animation:lineTop 1s forwards;
 }
 
-/* SCAN */
+/* LINEA INFERIOR */
 .title::after{
-  content:"";
-  position:absolute;
-  width:100%;
-  height:100%;
-  background:linear-gradient(120deg, transparent, rgba(0,191,255,0.5), transparent);
-  animation:scan 2s infinite;
+content:"";
+position:absolute;
+bottom:-8px;
+left:50%;
+transform:translateX(-50%);
+width:0%;
+height:2px;
+background:#00bfff;
+animation:lineBottom 1s forwards;
 }
 
-.subtitle{
-  font-size:11px;
-  color:#7fbfff;
-  margin-bottom:25px;
+/* EFECTO ESCANEO */
+.scan{
+position:absolute;
+top:0;
+left:-100%;
+width:100%;
+height:100%;
+background:linear-gradient(120deg,transparent,rgba(0,191,255,0.6),transparent);
+animation:scan 2s infinite;
 }
 
-/* 🔥 BOTONES NORMALES (REGRESAR) */
+/* BOTONES */
 .link{
-  display:block;
-  width:80%; /* 👈 MÁS CORTO */
-  margin:10px auto;
-  background:rgba(0,191,255,0.08);
-  border:1px solid #00bfff;
-  padding:9px;
-  border-radius:12px;
-  color:#00bfff;
-  text-decoration:none;
-  font-size:11px;
-  transition:.25s;
+display:block;
+width:100%;
+padding:14px;
+margin:12px 0;
+border-radius:14px;
+border:1px solid #00bfff;
+background:rgba(0,191,255,0.05);
+color:#00bfff;
+font-size:13px;
+cursor:pointer;
+transition:.25s;
+position:relative;
+overflow:hidden;
 }
 
-/* 🔥 BOTONES PRINCIPALES MÁS LARGOS */
-.big{
-  width:100%; /* 👈 ESTOS SON LOS LARGOS */
+/* EFECTO BRILLO BOTÓN */
+.link::before{
+content:"";
+position:absolute;
+left:-100%;
+top:0;
+width:100%;
+height:100%;
+background:linear-gradient(120deg,transparent,rgba(255,255,255,0.4),transparent);
+transition:.5s;
 }
 
-.link:hover{
-  transform:scale(1.06);
-  box-shadow:0 0 15px #00bfff, 0 0 25px #00bfff;
-  background:rgba(0,191,255,0.2);
+.link:hover::before{
+left:100%;
 }
 
-.links{
-  width:100%;
+/* ACTIVADO */
+.link.active-btn{
+background:#00ffcc;
+color:black;
+border-color:#00ffcc;
+box-shadow:0 0 20px #00ffcc;
 }
 
-/* ABAJO */
-.bottom{
-  margin-top:45px;
-  width:100%;
+.link.active-btn::after{
+content:" ✔";
 }
 
-.footer{
-  margin-top:10px;
-  font-size:10px;
-  color:#555;
+/* TOQUE */
+.link:active{
+transform:scale(.90);
 }
+
+/* PAGINAS */
+.page{display:none;}
+.active{display:block; animation:fadeIn .4s;}
+
+/* REGRESAR */
+.back{
+margin-top:20px;
+font-size:12px;
+color:#aaa;
+background:none;
+border:none;
+cursor:pointer;
+}
+
+/* LOADER */
+.loader{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:black;
+display:flex;
+justify-content:center;
+align-items:center;
+color:#00bfff;
+font-size:18px;
+opacity:0;
+pointer-events:none;
+transition:.3s;
+}
+
+.loader.show{opacity:1;}
 
 /* ANIMACIONES */
-@keyframes fadeIn{
-  from{opacity:0; transform:translateY(25px);}
-  to{opacity:1;}
+@keyframes glow{
+from{text-shadow:0 0 5px #00bfff;}
+to{text-shadow:0 0 25px #00bfff;}
+}
+
+@keyframes lineTop{
+from{width:0;}
+to{width:120%;}
+}
+
+@keyframes lineBottom{
+from{width:0;}
+to{width:120%;}
 }
 
 @keyframes scan{
-  0%{transform:translateX(-100%);}
-  100%{transform:translateX(100%);}
+0%{left:-100%;}
+100%{left:100%;}
 }
 
-@keyframes lineCenter{
-  from{width:0%;}
-  to{width:100%;}
+@keyframes fadeIn{
+from{opacity:0; transform:translateY(20px);}
+to{opacity:1;}
 }
 
-@keyframes glow{
-  from{text-shadow:0 0 5px #00bfff;}
-  to{text-shadow:0 0 15px #00bfff,0 0 25px #00bfff;}
-}
 </style>
 </head>
 
@@ -149,74 +202,137 @@ canvas{
 
 <div class="container">
 
-  <div>
+<!-- HOME -->
+<div id="home" class="page active">
 
-    <div class="title">MODIFICACIÓN XIT</div>
+<div class="title">
+MODIFICACIÓN XIT
+<div class="scan"></div>
+</div>
 
-    <div class="subtitle">Sistema optimizado ⚡</div>
+<button class="link" onclick="openPage('config')">⚙️ Configuración</button>
+<button class="link" onclick="openPage('rendimiento')">🚀 Rendimiento</button>
+<button class="link" onclick="openPage('ajustes')">🎯 Ajustes</button>
+<button class="link" onclick="openPage('seguridad')">🔒 Seguridad</button>
 
-    <div class="links">
-      <a class="link big" href="config.html">⚙️ Configuración</a>
-      <a class="link big" href="rendimiento.html">🚀 Rendimiento</a>
-      <a class="link big" href="ajustes.html">🎯 Ajustes</a>
-      <a class="link big" href="seguridad.html">🔒 Seguridad</a>
-
-      <a class="link big" href="https://wa.me/526151160719" target="_blank">📲 WhatsApp</a>
-    </div>
-
-  </div>
-
-  <!-- REGRESAR NORMAL -->
-  <div class="bottom">
-    <a class="link" href="index.html">⬅️ Regresar</a>
-    <div class="footer">© Samirxxx ⚡</div>
-  </div>
+<button class="link" onclick="abrirFF()">🔥 Abrir Free Fire</button>
 
 </div>
 
+<!-- CONFIG -->
+<div id="config" class="page">
+<div class="title">CONFIGURACIÓN<div class="scan"></div></div>
+
+<button class="link" onclick="toggle(this)">FPS BOOST</button>
+<button class="link" onclick="toggle(this)">Optimización EXTREMA</button>
+<button class="link" onclick="toggle(this)">Modo PRO</button>
+
+<button class="back" onclick="back()">⬅️ Regresar</button>
+</div>
+
+<!-- RENDIMIENTO -->
+<div id="rendimiento" class="page">
+<div class="title">RENDIMIENTO<div class="scan"></div></div>
+
+<button class="link" onclick="toggle(this)">Mejorar FPS</button>
+<button class="link" onclick="toggle(this)">Reducir LAG</button>
+<button class="link" onclick="toggle(this)">Estabilidad</button>
+
+<button class="back" onclick="back()">⬅️ Regresar</button>
+</div>
+
+<!-- AJUSTES -->
+<div id="ajustes" class="page">
+<div class="title">AJUSTES<div class="scan"></div></div>
+
+<button class="link" onclick="toggle(this)">Sensibilidad PRO</button>
+<button class="link" onclick="toggle(this)">HUD personalizado</button>
+<button class="link" onclick="toggle(this)">Control avanzado</button>
+
+<button class="back" onclick="back()">⬅️ Regresar</button>
+</div>
+
+<!-- SEGURIDAD -->
+<div id="seguridad" class="page">
+<div class="title">SEGURIDAD<div class="scan"></div></div>
+
+<button class="link" onclick="toggle(this)">Anti-Ban</button>
+<button class="link" onclick="toggle(this)">Modo seguro</button>
+<button class="link" onclick="toggle(this)">Sistema oculto</button>
+
+<button class="back" onclick="back()">⬅️ Regresar</button>
+</div>
+
+</div>
+
+<div id="loader" class="loader">Abriendo juego...</div>
+
 <script>
+
+/* NAV */
+function openPage(id){
+document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+document.getElementById(id).classList.add('active');
+}
+
+function back(){openPage('home');}
+
+/* ACTIVAR */
+function toggle(btn){
+btn.classList.toggle("active-btn");
+}
+
+/* FREE FIRE */
+function abrirFF(){
+const loader=document.getElementById("loader");
+loader.classList.add("show");
+
+setTimeout(()=>{window.location.href="freefire://";},500);
+setTimeout(()=>{window.location.href="https://apps.apple.com/app/free-fire/id1300146617";},2000);
+}
+
+/* FONDO */
 const canvas=document.getElementById("canvas");
 const ctx=canvas.getContext("2d");
 
 function resize(){
-  canvas.width=window.innerWidth;
-  canvas.height=window.innerHeight;
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
 }
-window.addEventListener('resize',resize);
 resize();
+window.addEventListener("resize",resize);
 
 let particles=[];
 for(let i=0;i<60;i++){
-  particles.push({
-    x:Math.random()*canvas.width,
-    y:Math.random()*canvas.height,
-    r:Math.random()*1.2,
-    dx:(Math.random()-0.5)*0.3,
-    dy:Math.random()*0.5
-  });
+particles.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+r:Math.random()*1.5,
+dx:(Math.random()-0.5)*0.4,
+dy:Math.random()*0.6
+});
 }
 
 function animate(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
+ctx.clearRect(0,0,canvas.width,canvas.height);
 
-  particles.forEach(p=>{
-    p.x+=p.dx;
-    p.y+=p.dy;
+particles.forEach(p=>{
+p.x+=p.dx;
+p.y+=p.dy;
 
-    ctx.beginPath();
-    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-    ctx.fillStyle='rgba(0,191,255,0.5)';
-    ctx.fill();
+ctx.beginPath();
+ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+ctx.fillStyle='rgba(0,191,255,0.5)';
+ctx.fill();
 
-    if(p.y>canvas.height)p.y=0;
-    if(p.x>canvas.width)p.x=0;
-    if(p.x<0)p.x=canvas.width;
-  });
+if(p.y>canvas.height)p.y=0;
+if(p.x>canvas.width)p.x=0;
+});
 
-  requestAnimationFrame(animate);
+requestAnimationFrame(animate);
 }
-
 animate();
+
 </script>
 
 </body>
