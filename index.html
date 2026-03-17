@@ -90,6 +90,14 @@ padding:16px;
 margin-bottom:22px;
 border:1px solid rgba(255,255,255,.08);
 backdrop-filter:blur(6px);
+opacity:0;
+transform:translateY(20px);
+animation:profileFade 0.6s forwards;
+}
+
+@keyframes profileFade{
+0%{opacity:0; transform:translateY(20px);}
+100%{opacity:1; transform:translateY(0);}
 }
 
 .avatar{
@@ -129,6 +137,15 @@ font-size:12px;
 transition:.3s;
 position:relative;
 overflow:hidden;
+
+opacity:0;
+transform:translateY(15px);
+animation:buttonFade 0.5s forwards;
+}
+
+@keyframes buttonFade{
+0%{opacity:0; transform:translateY(15px);}
+100%{opacity:1; transform:translateY(0);}
 }
 
 .link:hover{
@@ -158,6 +175,20 @@ left:100%;
 border:1px solid #1d9bf0;
 box-shadow:0 0 10px rgba(29,155,240,.6);
 margin-top:25px; /* espacio extra para separar */
+position:relative;
+}
+
+.link.next::after{
+content:"➤";
+position:absolute;
+right:10px;
+animation:arrowMove 1s infinite;
+}
+
+@keyframes arrowMove{
+0%{transform:translateX(0);}
+50%{transform:translateX(5px);}
+100%{transform:translateX(0);}
 }
 
 /* SEPARADOR */
@@ -203,7 +234,7 @@ SERVICIOS ONLINE
 
 <div class="container">
 
-<div class="profile">
+<div class="profile" style="animation-delay:0s;">
 <img src="images/20260316210408.png" class="avatar">
 
 <div class="badges">
@@ -213,28 +244,31 @@ SERVICIOS ONLINE
 </div>
 </div>
 
-<a class="link" href="https://wa.me/526151160719?text=Deseo%20adquirir%20tu%20producto%20Proxy%20FF">Proxy iPhone</a>
+<a class="link" style="animation-delay:0.2s;" href="https://wa.me/526151160719?text=Deseo%20adquirir%20tu%20producto%20Proxy%20FF">Proxy iPhone</a>
 
-<a class="link" href="https://wa.me/526151160719?text=Deseo%20adquirir%20tu%20producto%20Aim%20Drag">Aim Drag</a>
+<a class="link" style="animation-delay:0.4s;" href="https://wa.me/526151160719?text=Deseo%20adquirir%20tu%20producto%20Aim%20Drag">Aim Drag</a>
 
-<a class="link" href="https://wa.me/526151160719?text=Deseo%20adquirir%20tu%20producto%20Aim%20Body">Aim Body</a>
+<a class="link" style="animation-delay:0.6s;" href="https://wa.me/526151160719?text=Deseo%20adquirir%20tu%20producto%20Aim%20Body">Aim Body</a>
 
-<a class="link" href="https://www.mediafire.com/file/jkr4mo3jfvbjpl3/FREEFIRE_1.120.X_1770696911.ipa/file">IPA Gratis</a>
+<a class="link" style="animation-delay:0.8s;" href="https://www.mediafire.com/file/jkr4mo3jfvbjpl3/FREEFIRE_1.120.X_1770696911.ipa/file">IPA Gratis</a>
+
+<!-- BOTÓN ESING IOS actualizado con tu enlace -->
+<a class="link" style="animation-delay:1s;" href="https://share.google.com/9nME96SQMydThxZGk" target="_blank">ESING IOS</a>
 
 <div class="sep">COLABORADOR</div>
 
-<div class="profile">
+<div class="profile" style="animation-delay:1.2s;">
 <img src="images/20260316210415.png" class="avatar" style="width:50px;height:50px;">
 <div style="margin-top:6px;font-size:13px">@47Renovado</div>
 </div>
 
-<a class="link" href="https://wa.me/573025434258?text=Deseo%20adquirir%20tu%20producto%20Aimbot%20Cuello">Aimbot Cuello</a>
+<a class="link" style="animation-delay:1.4s;" href="https://wa.me/573025434258?text=Deseo%20adquirir%20tu%20producto%20Aimbot%20Cuello">Aimbot Cuello</a>
 
-<a class="link" href="https://wa.me/573025434258?text=Deseo%20adquirir%20tu%20producto%20Holograma">Holograma</a>
+<a class="link" style="animation-delay:1.6s;" href="https://wa.me/573025434258?text=Deseo%20adquirir%20tu%20producto%20Holograma">Holograma</a>
 
-<a class="link" href="https://wa.me/573025434258?text=Deseo%20adquirir%20tu%20producto%20Balas%20Magicas">Balas Mágicas</a>
+<a class="link" style="animation-delay:1.8s;" href="https://wa.me/573025434258?text=Deseo%20adquirir%20tu%20producto%20Balas%20Magicas">Balas Mágicas</a>
 
-<a class="link next" href="next.html">Siguiente →</a>
+<a class="link next" style="animation-delay:2s;" href="next.html">Siguiente →</a>
 
 <div class="footer">
 © 2026 Samirxx
