@@ -13,12 +13,24 @@ body{
   font-family:'Inter',sans-serif;
   background:#000;
   color:white;
+  overflow-x:hidden;
+}
+
+/* FONDO */
+canvas{
+  position:fixed;
+  top:0;
+  left:0;
+  z-index:0;
+  pointer-events:none;
 }
 
 /* CONTENEDOR */
 .container{
+  position:relative;
+  z-index:1;
   width:85%;
-  max-width:200px; /* MÁS PEQUEÑO AÚN */
+  max-width:210px; /* MUY PEQUEÑO */
   margin:auto;
   padding:8px 0;
   text-align:center;
@@ -44,6 +56,7 @@ h1,.user2{
   font-size:14px;
   margin:3px 0;
   color:#ff4444;
+  text-shadow:0 0 6px red;
 }
 
 p{
@@ -52,24 +65,31 @@ p{
   color:#aaa;
 }
 
-/* BOTONES */
-.link{
-  display:block;
-  background:red;
-  padding:6px;
-  margin:3px 0;
-  border-radius:6px;
-  text-decoration:none;
-  color:white;
-  font-size:11px;
-  box-shadow:0 0 5px red;
-}
-
-/* ESPACIO */
+/* SECCIONES */
 .section{
   margin-top:10px;
 }
 
+/* BOTONES */
+.link{
+  display:block;
+  background:linear-gradient(145deg,#ff5555,#ff2222);
+  padding:6px;
+  margin:3px 0;
+  border-radius:7px;
+  text-decoration:none;
+  color:white;
+  font-size:11px;
+  border:1px solid #ff4444;
+  box-shadow:0 0 5px red;
+  transition:0.2s;
+}
+
+.link:active{
+  transform:scale(0.95);
+}
+
+/* FOOTER */
 .footer{
   font-size:9px;
   margin-top:10px;
@@ -80,34 +100,81 @@ p{
 
 <body>
 
+<canvas id="canvas"></canvas>
+
 <div class="container">
 
+  <!-- PERFIL 1 -->
   <img src="images/20260316210408.png" class="avatar">
   <h1>Samirxx</h1>
   <p>@samirxx</p>
 
   <div class="section">
-    <a class="link" href="https://wa.me/526151160719">WhatsApp</a>
-    <a class="link" href="https://wa.me/526151160719">PROXY IPHONE</a>
-    <a class="link" href="https://wa.me/526151160719">AIM DRAG</a>
-    <a class="link" href="https://wa.me/526151160719">AIM BODY</a>
+    <a class="link" href="https://wa.me/526151160719?text=Hola" target="_blank">📲 WhatsApp</a>
+    <a class="link" href="https://wa.me/526151160719?text=PROXY IPHONE" target="_blank">PROXY IPHONE</a>
+    <a class="link" href="https://wa.me/526151160719?text=AIM DRAG" target="_blank">AIM DRAG</a>
+    <a class="link" href="https://wa.me/526151160719?text=AIM BODY" target="_blank">AIM BODY</a>
   </div>
 
+  <!-- PERFIL 2 -->
   <div class="section">
     <img src="images/20260316210415.png" class="avatar small">
     <p class="user2">@47Renovado</p>
 
-    <a class="link" href="https://wa.me/573025434258">WhatsApp</a>
-    <a class="link" href="https://wa.me/573025434258">AIMBOT CUELLO</a>
-    <a class="link" href="https://wa.me/573025434258">HOLOGRAMA</a>
-    <a class="link" href="https://wa.me/573025434258">BALAS MÁGICAS</a>
+    <a class="link" href="https://wa.me/573025434258?text=Hola" target="_blank">WhatsApp</a>
+    <a class="link" href="https://wa.me/573025434258?text=AIMBOT CUELLO" target="_blank">AIMBOT CUELLO</a>
+    <a class="link" href="https://wa.me/573025434258?text=HOLOGRAMA" target="_blank">HOLOGRAMA</a>
+    <a class="link" href="https://wa.me/573025434258?text=BALAS MAGICAS" target="_blank">BALAS MÁGICAS</a>
 
-    <a class="link" href="next.html">Siguiente</a>
+    <a class="link" href="next.html">Siguiente ➡️</a>
   </div>
 
-  <div class="footer">© Samirxx</div>
+  <div class="footer">© 2026 Samirxx ⚡</div>
 
 </div>
+
+<script>
+const canvas=document.getElementById("canvas");
+const ctx=canvas.getContext("2d");
+
+function resizeCanvas(){
+  canvas.width=window.innerWidth;
+  canvas.height=window.innerHeight;
+}
+window.addEventListener('resize',resizeCanvas);
+resizeCanvas();
+
+/* PARTÍCULAS MÁS PEQUEÑAS */
+const particles=[];
+for(let i=0;i<80;i++){
+  particles.push({
+    x:Math.random()*canvas.width,
+    y:Math.random()*canvas.height,
+    r:Math.random()*1.2+0.3,
+    dx:(Math.random()-0.5)*0.3,
+    dy:Math.random()*0.6
+  });
+}
+
+function animate(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  particles.forEach(p=>{
+    p.x+=p.dx;
+    p.y+=p.dy;
+
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fillStyle='rgba(255,50,50,0.6)';
+    ctx.fill();
+
+    if(p.y>canvas.height)p.y=0;
+    if(p.x>canvas.width)p.x=0;
+    if(p.x<0)p.x=canvas.width;
+  });
+  requestAnimationFrame(animate);
+}
+animate();
+</script>
 
 </body>
 </html>
