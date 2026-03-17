@@ -16,7 +16,6 @@ body{
   overflow:hidden;
 }
 
-/* FONDO */
 canvas{
   position:fixed;
   top:0;
@@ -26,83 +25,120 @@ canvas{
 
 /* CONTENEDOR */
 .container{
-  width:85%;
-  max-width:240px;
+  width:90%;
+  max-width:300px;
   margin:auto;
   text-align:center;
   position:relative;
   z-index:1;
+  min-height:100vh;
   display:flex;
   flex-direction:column;
-  justify-content:center;
-  min-height:100vh;
-}
-
-/* LÍNEA ANIMADA */
-.line{
-  height:2px;
-  width:0%;
-  background:#00bfff;
-  margin:0 auto 15px;
-  animation:lineGrow 1.2s ease forwards;
+  align-items:center;
+  padding-top:60px;
+  animation:fadeIn 1s ease;
 }
 
 /* TITULO */
 .title{
-  font-size:16px;
-  letter-spacing:1px;
+  display:inline-block;
+  font-size:15px;
   color:#00bfff;
   position:relative;
   margin-bottom:10px;
+  animation:glow 2s infinite alternate;
 }
 
-/* EFECTO SCAN */
+/* LINEA */
+.title::before{
+  content:"";
+  position:absolute;
+  bottom:-6px;
+  left:50%;
+  transform:translateX(-50%);
+  height:2px;
+  width:0%;
+  background:#00bfff;
+  animation:lineCenter 1s forwards;
+}
+
+/* SCAN */
 .title::after{
   content:"";
   position:absolute;
-  left:0;
-  top:0;
   width:100%;
   height:100%;
-  background:linear-gradient(120deg, transparent, rgba(0,191,255,0.6), transparent);
+  background:linear-gradient(120deg, transparent, rgba(0,191,255,0.5), transparent);
   animation:scan 2s infinite;
 }
 
-/* SUB */
 .subtitle{
   font-size:11px;
   color:#7fbfff;
-  margin-bottom:20px;
+  margin-bottom:25px;
 }
 
-/* BOTÓN */
+/* 🔥 BOTONES NORMALES (REGRESAR) */
 .link{
   display:block;
-  background:rgba(0,191,255,0.1);
+  width:80%; /* 👈 MÁS CORTO */
+  margin:10px auto;
+  background:rgba(0,191,255,0.08);
   border:1px solid #00bfff;
-  padding:7px;
-  border-radius:8px;
-  text-decoration:none;
+  padding:9px;
+  border-radius:12px;
   color:#00bfff;
+  text-decoration:none;
   font-size:11px;
-  backdrop-filter:blur(5px);
-  transition:0.3s;
+  transition:.25s;
 }
 
-.link:active{
-  transform:scale(0.95);
-  box-shadow:0 0 10px #00bfff;
+/* 🔥 BOTONES PRINCIPALES MÁS LARGOS */
+.big{
+  width:100%; /* 👈 ESTOS SON LOS LARGOS */
+}
+
+.link:hover{
+  transform:scale(1.06);
+  box-shadow:0 0 15px #00bfff, 0 0 25px #00bfff;
+  background:rgba(0,191,255,0.2);
+}
+
+.links{
+  width:100%;
+}
+
+/* ABAJO */
+.bottom{
+  margin-top:45px;
+  width:100%;
+}
+
+.footer{
+  margin-top:10px;
+  font-size:10px;
+  color:#555;
 }
 
 /* ANIMACIONES */
-@keyframes lineGrow{
-  from{width:0;}
-  to{width:60%;}
+@keyframes fadeIn{
+  from{opacity:0; transform:translateY(25px);}
+  to{opacity:1;}
 }
 
 @keyframes scan{
   0%{transform:translateX(-100%);}
   100%{transform:translateX(100%);}
+}
+
+@keyframes lineCenter{
+  from{width:0%;}
+  to{width:100%;}
+}
+
+@keyframes glow{
+  from{text-shadow:0 0 5px #00bfff;}
+  to{text-shadow:0 0 15px #00bfff,0 0 25px #00bfff;}
 }
 </style>
 </head>
@@ -113,12 +149,28 @@ canvas{
 
 <div class="container">
 
-  <div class="line"></div>
+  <div>
 
-  <div class="title">MODIFICACIÓN XIT</div>
-  <div class="subtitle">Sistema en preparación</div>
+    <div class="title">MODIFICACIÓN XIT</div>
 
-  <a class="link" href="index.html">⬅️ Regresar</a>
+    <div class="subtitle">Sistema optimizado ⚡</div>
+
+    <div class="links">
+      <a class="link big" href="config.html">⚙️ Configuración</a>
+      <a class="link big" href="rendimiento.html">🚀 Rendimiento</a>
+      <a class="link big" href="ajustes.html">🎯 Ajustes</a>
+      <a class="link big" href="seguridad.html">🔒 Seguridad</a>
+
+      <a class="link big" href="https://wa.me/526151160719" target="_blank">📲 WhatsApp</a>
+    </div>
+
+  </div>
+
+  <!-- REGRESAR NORMAL -->
+  <div class="bottom">
+    <a class="link" href="index.html">⬅️ Regresar</a>
+    <div class="footer">© Samirxxx ⚡</div>
+  </div>
 
 </div>
 
@@ -126,27 +178,27 @@ canvas{
 const canvas=document.getElementById("canvas");
 const ctx=canvas.getContext("2d");
 
-function resizeCanvas(){
+function resize(){
   canvas.width=window.innerWidth;
   canvas.height=window.innerHeight;
 }
-window.addEventListener('resize',resizeCanvas);
-resizeCanvas();
+window.addEventListener('resize',resize);
+resize();
 
-/* PARTÍCULAS AZULES DIFERENTES */
-const particles=[];
+let particles=[];
 for(let i=0;i<60;i++){
   particles.push({
     x:Math.random()*canvas.width,
     y:Math.random()*canvas.height,
-    r:Math.random()*1.5,
-    dx:(Math.random()-0.5)*0.2,
-    dy:Math.random()*0.4
+    r:Math.random()*1.2,
+    dx:(Math.random()-0.5)*0.3,
+    dy:Math.random()*0.5
   });
 }
 
 function animate(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
+
   particles.forEach(p=>{
     p.x+=p.dx;
     p.y+=p.dy;
@@ -160,8 +212,10 @@ function animate(){
     if(p.x>canvas.width)p.x=0;
     if(p.x<0)p.x=canvas.width;
   });
+
   requestAnimationFrame(animate);
 }
+
 animate();
 </script>
 
