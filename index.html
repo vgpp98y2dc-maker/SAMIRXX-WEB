@@ -5,103 +5,176 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Samirxx</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
 <style>
 body {
-  margin: 0;
-  background: black;
-  font-family: Arial;
-  text-align: center;
-  color: white;
+  margin:0;
+  font-family:'Inter',sans-serif;
+  background:#000;
+  color:white;
+  overflow-x:hidden;
 }
 
 /* FONDO */
-body::before {
-  content: "";
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background-image: radial-gradient(red 1px, transparent 1px);
-  background-size: 30px 30px;
-  animation: move 10s linear infinite;
-  opacity: 0.3;
-}
-
-@keyframes move {
-  from {transform: translateY(0);}
-  to {transform: translateY(100px);}
+canvas {
+  position:fixed;
+  top:0;
+  left:0;
+  z-index:0;
+  pointer-events:none;
 }
 
 /* CONTENEDOR */
 .container {
-  max-width: 350px;
-  margin: auto;
-  padding-top: 20px;
+  position:relative;
+  z-index:1;
+  width:90%;
+  max-width:350px;
+  margin:auto;
+  padding:20px 0;
+  text-align:center;
 }
 
-/* IMÁGENES */
-img {
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-  border: 3px solid red;
-  box-shadow: 0 0 15px red;
+/* AVATAR */
+.avatar {
+  width:90px;
+  height:90px;
+  border-radius:50%;
+  margin-bottom:10px;
+  border:2px solid rgba(255,50,50,0.8);
+  box-shadow:0 0 20px rgba(255,50,50,0.8);
+}
+
+.avatar.small {
+  width:75px;
+  height:75px;
 }
 
 /* TEXTO */
-h1 {
-  font-size: 22px;
-  color: red;
-  margin: 10px 0;
+h1, .user2 {
+  font-size:22px;
+  color:#ff4444;
+  text-shadow:0 0 10px #ff4444;
+  margin:5px 0;
+}
+
+p {
+  font-size:14px;
+  color:#aaa;
+  margin-bottom:15px;
+}
+
+/* SECCIONES */
+.section {
+  margin-top:25px;
 }
 
 /* BOTONES */
-.btn {
-  display: block;
-  background: red;
-  color: white;
-  padding: 12px;
-  margin: 8px auto;
-  width: 90%;
-  border-radius: 10px;
-  text-decoration: none;
-  font-size: 14px;
-  box-shadow: 0 0 10px red;
+.link {
+  display:block;
+  background:linear-gradient(145deg,#ff5555,#ff2222);
+  padding:10px;
+  margin:6px 0;
+  border-radius:10px;
+  text-decoration:none;
+  color:white;
+  font-size:14px;
+  border:1px solid #ff4444;
+  box-shadow:0 0 10px #ff5555;
+  transition:0.2s;
 }
 
-.section {
-  margin-bottom: 30px;
+.link:active {
+  transform:scale(0.95);
+}
+
+/* FOOTER */
+.footer {
+  margin-top:25px;
+  font-size:12px;
+  color:#666;
 }
 </style>
-
 </head>
 
 <body>
 
+<canvas id="canvas"></canvas>
+
 <div class="container">
 
-  <div class="section">
-    <img src="images/20260316210408.png">
-    <h1>Samirxx</h1>
+  <img src="images/20260316210408.png" class="avatar">
+  
+  <h1>Samirxx</h1>
+  <p>@samirxx</p>
 
-    <!-- CAMBIA EL NÚMERO -->
-    <a class="btn" href="https://wa.me/521XXXXXXXXXX" target="_blank">WhatsApp</a>
-    <a class="btn" href="#">PROXY IPHONE</a>
-    <a class="btn" href="#">AIM DRAG</a>
-    <a class="btn" href="#">AIM BODY</a>
+  <div class="section">
+    <a class="link" href="https://wa.me/526151160719?text=Hola%20quiero%20info" target="_blank">📲 WhatsApp</a>
+    <a class="link" href="https://wa.me/526151160719?text=Quiero%20PROXY%20IPHONE" target="_blank">PROXY IPHONE</a>
+    <a class="link" href="https://wa.me/526151160719?text=Quiero%20AIM%20DRAG" target="_blank">AIM DRAG</a>
+    <a class="link" href="https://wa.me/526151160719?text=Quiero%20AIM%20BODY" target="_blank">AIM BODY</a>
   </div>
 
   <div class="section">
-    <img src="images/20260316210415.png">
-    <h1>@47Renovado</h1>
+    <div class="profile-box">
 
-    <!-- CAMBIA EL NÚMERO -->
-    <a class="btn" href="https://wa.me/521XXXXXXXXXX" target="_blank">WhatsApp</a>
-    <a class="btn" href="#">AIMBOT CUELLO</a>
-    <a class="btn" href="#">HOLOGRAMA</a>
-    <a class="btn" href="#">BALAS MÁGICAS</a>
+      <img src="images/20260316210415.png" class="avatar small">
+      
+      <p class="user2">@47Renovado</p>
+
+      <a class="link" href="https://wa.me/573025434258?text=Hola%20quiero%20info" target="_blank">WhatsApp</a>
+      <a class="link" href="https://wa.me/573025434258?text=Quiero%20AIMBOT%20CUELLO" target="_blank">AIMBOT CUELLO</a>
+      <a class="link" href="https://wa.me/573025434258?text=Quiero%20HOLOGRAMA" target="_blank">HOLOGRAMA</a>
+      <a class="link" href="https://wa.me/573025434258?text=Quiero%20BALAS%20MAGICAS" target="_blank">BALAS MÁGICAS</a>
+
+    </div>
   </div>
 
+  <div class="footer">© 2026 Samirxx ⚡</div>
 </div>
+
+<script>
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+
+function resizeCanvas(){
+  canvas.width=window.innerWidth;
+  canvas.height=window.innerHeight;
+}
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+
+const particles = [];
+for(let i=0;i<120;i++){ // menos partículas = más ligero
+  particles.push({
+    x:Math.random()*canvas.width,
+    y:Math.random()*canvas.height,
+    r:Math.random()*2+1,
+    dx:(Math.random()-0.5)*0.5,
+    dy:Math.random()*1
+  });
+}
+
+function animate(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  particles.forEach(p=>{
+    p.x += p.dx;
+    p.y += p.dy;
+
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fillStyle = 'rgba(255,50,50,0.7)';
+    ctx.fill();
+
+    if(p.y>canvas.height)p.y=0;
+    if(p.x>canvas.width)p.x=0;
+    if(p.x<0)p.x=canvas.width;
+  });
+  requestAnimationFrame(animate);
+}
+animate();
+</script>
 
 </body>
 </html>
