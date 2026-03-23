@@ -40,7 +40,7 @@ backdrop-filter:blur(20px);
 width:110px;
 border-radius:50%;
 border:3px solid #ff4444;
-box-shadow:0 0 30px #ff4444;
+box-shadow:0 0 40px #ff0000, 0 0 80px rgba(255,0,0,0.5);
 }
 
 .name{
@@ -54,7 +54,7 @@ font-size:14px;
 margin-top:5px;
 }
 
-/* STATUS PRO */
+/* STATUS */
 .status{
 color:#00ff88;
 font-size:14px;
@@ -75,21 +75,9 @@ box-shadow:0 0 10px #00ff88;
 }
 
 @keyframes statusPulse{
-0%{
-transform:scale(1);
-opacity:1;
-box-shadow:0 0 5px #00ff88;
-}
-50%{
-transform:scale(1.6);
-opacity:0.5;
-box-shadow:0 0 20px #00ff88;
-}
-100%{
-transform:scale(1);
-opacity:1;
-box-shadow:0 0 5px #00ff88;
-}
+0%{transform:scale(1);opacity:1;}
+50%{transform:scale(1.6);opacity:0.5;}
+100%{transform:scale(1);opacity:1;}
 }
 
 /* CARDS */
@@ -102,7 +90,7 @@ margin:12px 0;
 backdrop-filter:blur(10px);
 transform:translateY(60px) scale(0.95);
 opacity:0;
-transition:0.8s cubic-bezier(.2,.8,.2,1);
+transition:0.8s;
 }
 
 .card.show{
@@ -192,14 +180,14 @@ color:#777;
 
 <div class="container">
 
-<img src="img/20260316205417.png" class="avatar">
+<img src="img/20260322231831.png" class="avatar">
+
 <div class="name">Samirxx</div>
 
 <div class="subtitle">
 Mods y configuraciones premium para mejorar tu rendimiento 🎯
 </div>
 
-<!-- STATUS ANIMADO -->
 <div class="status">
 <span class="dot"></span> Servicio disponible
 </div>
@@ -253,7 +241,6 @@ Mods y configuraciones premium para mejorar tu rendimiento 🎯
 <a href="https://wa.me/526151160719" class="floating">💬</a>
 
 <script>
-// PARTICULAS
 const canvas=document.getElementById("canvas");
 const ctx=canvas.getContext("2d");
 
@@ -276,22 +263,18 @@ dy:(Math.random()-0.5)
 
 function animate(){
 ctx.clearRect(0,0,canvas.width,canvas.height);
-
 particles.forEach(p=>{
 p.x+=p.dx;
 p.y+=p.dy;
-
 ctx.beginPath();
 ctx.arc(p.x,p.y,2,0,Math.PI*2);
 ctx.fillStyle="#ff4444";
 ctx.fill();
 });
-
 requestAnimationFrame(animate);
 }
 animate();
 
-// CLICK DISPOSITIVO → WHATSAPP
 document.querySelectorAll(".device").forEach(btn=>{
 btn.onclick=()=>{
 let dispositivo = btn.innerText;
@@ -301,13 +284,11 @@ window.location.href = url;
 };
 });
 
-// COMPRA
 function buy(product){
 let msg="Hola quiero "+product;
 window.location.href="https://wa.me/526151160719?text="+encodeURIComponent(msg);
 }
 
-// SCROLL
 const observer=new IntersectionObserver(entries=>{
 entries.forEach(entry=>{
 if(entry.isIntersecting){
