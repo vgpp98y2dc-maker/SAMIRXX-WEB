@@ -2,411 +2,322 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Samirxx</title>
-
-<meta name="theme-color" content="#0a0a0f">
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600&display=swap" rel="stylesheet">
+<title>Samirxx Store</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
-:root {
-    --bg: #05050a;
-    --accent: #00ffff;
-    --glow: rgba(0,255,255,0.85);
-    --text: #f0ffff;
-    --card: rgba(10,20,40,0.8);
+body{
+margin:0;
+font-family:'Inter',sans-serif;
+color:white;
+overflow-y:auto;
+overflow-x:hidden;
+scroll-behavior:smooth;
+background:linear-gradient(-45deg,#000,#0a0a0a,#111,#000);
+background-size:400% 400%;
+animation:bgMove 15s ease infinite;
 }
 
-* { margin:0; padding:0; box-sizing:border-box; }
-body {
-    font-family:'Inter',sans-serif;
-    background:var(--bg);
-    color:var(--text);
-    min-height:100vh;
-    overflow-x:hidden;
-    font-size:11px;
-    touch-action: manipulation;
+canvas{
+position:fixed;
+top:0;
+left:0;
+z-index:0;
 }
 
-/* ANIMACIÓN DE BORDE NEÓN QUE SE MUEVE (PUM) */
-.neon-border {
-    position: relative;
-    border: 1px solid transparent;
-    background: linear-gradient(var(--bg), var(--bg)) padding-box;
-    overflow: hidden;
-}
-.neon-border::before {
-    content: "";
-    position: absolute;
-    inset: -2px;
-    background: linear-gradient(90deg, #00ffff, #ff00ff, #00ffff, #ff00ff);
-    background-size: 300% 300%;
-    animation: borderFlow 4s linear infinite;
-    border-radius: inherit;
-    filter: blur(2px);
-    z-index: -1;
-}
-.neon-border::after {
-    content: "";
-    position: absolute;
-    inset: -1px;
-    background: linear-gradient(90deg, #00ffff, #ff00ff, #00ffff, #ff00ff);
-    background-size: 300% 300%;
-    animation: borderFlow 4s linear infinite reverse;
-    border-radius: inherit;
-    z-index: -1;
-}
-@keyframes borderFlow {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+.container{
+position:relative;
+z-index:1;
+max-width:500px;
+margin:auto;
+padding:25px;
+text-align:center;
+backdrop-filter:blur(20px);
 }
 
-/* Resto de animaciones (mismas de antes, pero más ligeras) */
-@keyframes glitch { 0% { text-shadow:1.5px 0 #ff00ff,-1.5px 0 #00ffff; } 20% { text-shadow:-1.5px 0 #ff00ff,1.5px 0 #00ffff; transform:translate(-1px,1px); } 40% { text-shadow:1.5px 0 #ff00ff,-1.5px 0 #00ffff; transform:translate(1px,-1px); } 100% { text-shadow:none; transform:translate(0); } }
-
-@keyframes pulseGlow { 0%,100% { box-shadow:0 0 4px var(--glow); } 50% { box-shadow:0 0 18px var(--glow); } }
-
-@keyframes bounceIn { 0% { opacity:0; transform:translateY(8px) scale(0.8); } 60% { opacity:1; transform:translateY(-3px) scale(1.05); } 100% { transform:translateY(0) scale(1); } }
-
-@keyframes flicker { 0%,100% { opacity:1; } 50% { opacity:0.7; } }
-
-@keyframes scan { 0% { transform:translateY(-200%); } 100% { transform:translateY(200%); } }
-
-@keyframes ripple { 0% { transform:scale(0); opacity:0.5; } 100% { transform:scale(3); opacity:0; } }
-
-/* HEADER mini */
-.header {
-    text-align:center;
-    padding:5px 4px 2px;
-    font-size:14px;
-    letter-spacing:1.2px;
-    color:var(--accent);
-    font-weight:700;
-    animation:glitch 1.8s infinite alternate;
+/* HEADER */
+.avatar{
+width:110px;
+border-radius:50%;
+border:3px solid #ff4444;
+box-shadow:0 0 30px #ff4444;
 }
 
-/* STATUS mini */
-.status {
-    text-align:center;
-    font-size:9px;
-    margin:2px 0 8px;
-    color:#00ffcc;
-    font-weight:600;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:4px;
-    animation:pulseGlow 4s infinite;
+.name{
+font-size:28px;
+margin-top:10px;
 }
 
-/* PERFIL ultra mini */
-.profile {
-    background:var(--card);
-    backdrop-filter:blur(10px);
-    border:1px solid rgba(0,255,255,0.55);
-    border-radius:7px;
-    padding:5px 4px;
-    margin:6px 0;
-    text-align:center;
-    position:relative;
-    overflow:hidden;
-}
-.profile::before {
-    content:"";
-    position:absolute;
-    inset:0;
-    background:linear-gradient(transparent,rgba(0,255,255,0.18),transparent);
-    animation:scan 6s linear infinite;
-}
-.avatar {
-    width:38px;
-    height:38px;
-    border-radius:50%;
-    border:1.5px solid var(--accent);
-    box-shadow:0 0 10px var(--glow);
-    margin-bottom:3px;
-    animation:pulseGlow 2.5s infinite;
-}
-.badges {
-    font-size:8px;
-    line-height:1.2;
-    opacity:0.9;
+.subtitle{
+color:#aaa;
+font-size:14px;
+margin-top:5px;
 }
 
-/* OFERTA mini */
-.oferta {
-    background:rgba(255,60,60,0.35);
-    border:1px solid #ff3333;
-    color:#ffcccc;
-    padding:5px;
-    border-radius:6px;
-    margin:6px 0;
-    font-size:10px;
-    font-weight:600;
-    text-align:center;
-    animation:flicker 3s infinite, pulseGlow 5s infinite;
+/* STATUS PRO */
+.status{
+color:#00ff88;
+font-size:14px;
+margin-top:5px;
+display:flex;
+justify-content:center;
+align-items:center;
+gap:8px;
 }
 
-/* UPDATE mini */
-.update {
-    text-align:center;
-    font-size:8px;
-    color:#00ff99;
-    margin:3px 0 6px;
-    opacity:0.8;
-    animation:flicker 5s infinite;
+.dot{
+width:10px;
+height:10px;
+background:#00ff88;
+border-radius:50%;
+animation:statusPulse 1.2s infinite;
+box-shadow:0 0 10px #00ff88;
 }
 
-/* BOTONES ultra mini */
-.link {
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:4px;
-    padding:6px 10px;
-    margin:5px 0;
-    border-radius:6px;
-    border:1px solid rgba(0,255,255,0.65);
-    color:var(--text);
-    font-size:11px;
-    font-weight:600;
-    text-decoration:none;
-    position:relative;
-    overflow:hidden;
-    animation:bounceIn 0.5s forwards;
+@keyframes statusPulse{
+0%{
+transform:scale(1);
+opacity:1;
+box-shadow:0 0 5px #00ff88;
 }
-.link::after {
-    content:"";
-    position:absolute;
-    top:50%; left:50%;
-    width:0; height:0;
-    background:rgba(0,255,255,0.4);
-    border-radius:50%;
-    transform:translate(-50%,-50%);
-    pointer-events:none;
+50%{
+transform:scale(1.6);
+opacity:0.5;
+box-shadow:0 0 20px #00ff88;
 }
-.link:active::after {
-    width:140px; height:140px;
-    animation:ripple 0.5s linear;
+100%{
+transform:scale(1);
+opacity:1;
+box-shadow:0 0 5px #00ff88;
 }
-.link:hover {
-    transform:scale(1.06) translateY(-1px);
-    box-shadow:0 0 18px var(--glow);
-    background:rgba(0,255,255,0.2);
-}
-.link:active {
-    transform:scale(0.94);
-}
-.link span.icon { font-size:11px; animation:pulseGlow 3s infinite; }
-
-/* COLAB mini */
-.collab {
-    background:var(--card);
-    border:1px solid rgba(0,255,255,0.5);
-    border-radius:7px;
-    padding:5px;
-    margin:8px 0 4px;
-    text-align:center;
-}
-.collab-avatar {
-    width:30px;
-    height:30px;
-    border-radius:50%;
-    border:1.2px solid var(--accent);
-    box-shadow:0 0 8px var(--glow);
 }
 
-/* NUEVAS COSITAS ABAJO */
-.benefits {
-    margin:12px 0 8px;
-    text-align:center;
-}
-.benefit-item {
-    font-size:9px;
-    margin:4px 0;
-    opacity:0.9;
-    animation:pulseGlow 4s infinite;
-}
-.benefit-item span { font-size:10px; margin-right:4px; }
-
-.testimonio-mini {
-    background:var(--card);
-    border:1px solid rgba(0,255,255,0.4);
-    border-radius:6px;
-    padding:6px;
-    margin:10px 0;
-    font-size:9px;
-    text-align:center;
-    opacity:0.85;
-    animation:flicker 6s infinite;
+/* CARDS */
+.card{
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(255,70,70,0.3);
+border-radius:16px;
+padding:18px;
+margin:12px 0;
+backdrop-filter:blur(10px);
+transform:translateY(60px) scale(0.95);
+opacity:0;
+transition:0.8s cubic-bezier(.2,.8,.2,1);
 }
 
-.cta-final {
-    @extend .neon-border;
-    background:rgba(0,255,255,0.12);
-    border-radius:8px;
-    padding:8px;
-    margin:12px 0 20px;
-    text-align:center;
-    font-size:11px;
-    font-weight:600;
-    box-shadow:0 0 12px var(--glow);
-    animation:pulseGlow 3s infinite;
+.card.show{
+opacity:1;
+transform:translateY(0) scale(1);
 }
 
-.footer {
-    text-align:center;
-    font-size:8px;
-    opacity:0.6;
-    margin:20px 0 60px;
-    padding-bottom:40px;
+.card:hover{
+transform:scale(1.04);
+box-shadow:0 0 20px #ff4444, 0 0 40px rgba(255,70,70,0.3);
 }
 
-/* FLOATS mini */
-.whatsapp-float, .copy-float {
-    position:fixed;
-    bottom:50px;
-    right:10px;
-    width:38px;
-    height:38px;
-    border-radius:50%;
-    box-shadow:0 2px 8px rgba(0,0,0,0.6);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:18px;
-    color:white;
-    z-index:1000;
-    transition:0.18s;
+/* BOTONES */
+.buy{
+margin-top:12px;
+padding:12px;
+border-radius:12px;
+background:linear-gradient(120deg,#ff2a2a,#ff5555);
+cursor:pointer;
+animation:glowPulse 2s infinite;
 }
-.whatsapp-float { background:#25D366; bottom:95px; }
-.copy-float { background:#5865F2; bottom:50px; font-size:16px; }
-.whatsapp-float:hover, .copy-float:hover { transform:scale(1.18); }
 
-/* CANVAS + lluvia y partículas mini */
-canvas { position:fixed; top:0; left:0; z-index:-1; }
+@keyframes glowPulse{
+0%{box-shadow:0 0 5px #ff4444;}
+50%{box-shadow:0 0 20px #ff4444;}
+100%{box-shadow:0 0 5px #ff4444;}
+}
+
+/* DISPOSITIVOS */
+.devices{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+margin-top:10px;
+}
+
+.device{
+padding:12px;
+border-radius:12px;
+background:#111;
+border:1px solid #ff4444;
+cursor:pointer;
+transition:0.3s;
+}
+
+.device:hover{
+transform:scale(1.08);
+box-shadow:0 0 15px #ff4444;
+background:#ff2a2a;
+}
+
+/* BOTON FLOTANTE */
+.floating{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#ff2a2a;
+padding:16px;
+border-radius:50%;
+box-shadow:0 0 20px #ff4444;
+animation:floatPulse 2s infinite;
+}
+
+@keyframes floatPulse{
+0%{box-shadow:0 0 10px #ff4444;}
+50%{box-shadow:0 0 25px #ff4444;}
+100%{box-shadow:0 0 10px #ff4444;}
+}
+
+@keyframes bgMove{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
+.footer{
+margin-top:20px;
+font-size:12px;
+color:#777;
+}
 </style>
 </head>
+
 <body>
 
-<canvas id="bg"></canvas>
-
-<div class="header">SAMIRXX</div>
-
-<div class="status">ONLINE</div>
+<canvas id="canvas"></canvas>
 
 <div class="container">
 
-    <div class="profile">
-        <img src="https://thumbs.dreamstime.com/b/hacker-neon-mask-binary-code-background-hooded-figure-blue-featuring-creepy-smile-eyes-stands-against-backdrop-419140077.jpg" alt="Mask" class="avatar">
-        <div class="badges">✔26 ✔Ráp ✔24/7</div>
-    </div>
+<img src="img/20260316205417.png" class="avatar">
+<div class="name">Samirxx</div>
 
-    <div class="oferta">⚡20% OFF HOY⚡</div>
+<div class="subtitle">
+Mods y configuraciones premium para mejorar tu rendimiento 🎯
+</div>
 
-    <div class="update">Update: Hoy 🔥</div>
+<!-- STATUS ANIMADO -->
+<div class="status">
+<span class="dot"></span> Servicio disponible
+</div>
 
-    <a class="link" href="https://wa.me/526151160719?text=Proxy%20YA" style="animation-delay:0.04s;">
-        <span class="icon">📡</span> Proxy
-    </a>
-    <a class="link" href="https://wa.me/526151160719?text=Aim%20Drag" style="animation-delay:0.08s;">
-        <span class="icon">🎯</span> Aim Drag
-    </a>
-    <a class="link" href="https://wa.me/526151160719?text=Aim%20Body" style="animation-delay:0.12s;">
-        <span class="icon">🎯</span> Aim Body
-    </a>
-    <a class="link" href="https://www.mediafire.com/file/jkr4mo3jfvbjpl3/FREEFIRE_1.120.X_1770696911.ipa/file" style="animation-delay:0.16s;">
-        <span class="icon">📥</span> IPA
-    </a>
+<div class="card">
+<p>⭐ 100% legal compra ya ✅</p>
+<p>⚡ Servicio rápido y seguro</p>
+</div>
 
-    <div style="margin:6px 0 3px; text-align:center; font-size:9px; opacity:0.7;">COLAB</div>
+<div class="card">
+<h3>👹Archivo👹</h3>
+<div>$10 USD</div>
+<p>Mejoras en tu jugabilidad</p>
+<div class="buy" onclick="buy('Archivo')">Comprar</div>
+</div>
 
-    <div class="collab">
-        <img src="images/20260316210415.png" alt="@47Renovado" class="collab-avatar">
-        <div style="font-size:9px;">@47Renovado</div>
-    </div>
+<div class="card">
+<h3>Modifax</h3>
+<div>$5 USD</div>
+<p>Mejor rendimiento y ajustes</p>
+<div class="buy" onclick="buy('Modifax')">Comprar</div>
+</div>
 
-    <a class="link" href="https://wa.me/573025434258?text=Aimbot" style="animation-delay:0.2s;">
-        <span class="icon">🎯</span> Aimbot
-    </a>
-    <a class="link" href="https://wa.me/573025434258?text=Holograma" style="animation-delay:0.24s;">
-        <span class="icon">✨</span> Holo
-    </a>
+<div class="card">
+<p>1️⃣ Elige tu producto</p>
+<p>2️⃣ Selecciona tu dispositivo</p>
+<p>3️⃣ Te atiendo por WhatsApp</p>
+</div>
 
-    <a class="link next" href="next.html">→</a>
+<h3>Selecciona tu dispositivo 📱</h3>
 
-    <!-- COSITAS ABAJO -->
-    <div class="benefits neon-border">
-        <div class="benefit-item"><span>⚡</span> < 5 min entrega</div>
-        <div class="benefit-item"><span>🔒</span> Seguro 100%</div>
-        <div class="benefit-item"><span>🆘</span> Soporte 24/7</div>
-    </div>
+<div class="devices">
+<div class="device">iPhone</div>
+<div class="device">Samsung</div>
+<div class="device">Xiaomi</div>
+<div class="device">Huawei</div>
+<div class="device">Motorola</div>
+<div class="device">Alcatel</div>
+</div>
 
-    <div class="cta-final neon-border">
-        ¡DM YA o pierdes el descuento! ⚡
-    </div>
+<div class="card">
+<p>📩 ¿No ves tu dispositivo? Te ayudo directamente</p>
+<p>🛠️ Compatible con iPhone y Android</p>
+<p>⚡ Atención rápida por WhatsApp</p>
+</div>
 
-    <div class="footer">
-        © 2026 Samirxx Network • Tijuana MX
-    </div>
+<div class="footer">© 2026 Samirxx Store</div>
 
 </div>
 
-<a href="https://wa.me/526151160719?text=Hola" class="whatsapp-float">💬</a>
-<a href="#" onclick="navigator.clipboard.writeText('+526151160719'); alert('Copiado 📋'); return false;" class="copy-float">📋</a>
+<a href="https://wa.me/526151160719" class="floating">💬</a>
 
 <script>
-// Canvas ultra ligero + lluvia digital
-const canvas = document.getElementById("bg");
-const ctx = canvas.getContext("2d");
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+// PARTICULAS
+const canvas=document.getElementById("canvas");
+const ctx=canvas.getContext("2d");
 
-let rainDrops = [];
-for(let i = 0; i < 30; i++){
-    rainDrops.push({
-        x: Math.random()*canvas.width,
-        y: Math.random()*-canvas.height,
-        length: Math.random()*12 + 6,
-        speed: Math.random()*2.5 + 1,
-        opacity: Math.random()*0.2 + 0.04
-    });
+function resize(){
+canvas.width=innerWidth;
+canvas.height=innerHeight;
+}
+resize();
+addEventListener("resize",resize);
+
+let particles=[];
+for(let i=0;i<70;i++){
+particles.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+dx:(Math.random()-0.5),
+dy:(Math.random()-0.5)
+});
 }
 
 function animate(){
-    ctx.clearRect(0,0,canvas.width,canvas.height);
+ctx.clearRect(0,0,canvas.width,canvas.height);
 
-    rainDrops.forEach(r => {
-        ctx.strokeStyle = `rgba(0,255,255,${r.opacity})`;
-        ctx.lineWidth = 0.7;
-        ctx.beginPath();
-        ctx.moveTo(r.x, r.y);
-        ctx.lineTo(r.x, r.y + r.length);
-        ctx.stroke();
+particles.forEach(p=>{
+p.x+=p.dx;
+p.y+=p.dy;
 
-        r.y += r.speed;
-        if(r.y > canvas.height) {
-            r.y = -r.length;
-            r.x = Math.random()*canvas.width;
-        }
-    });
+ctx.beginPath();
+ctx.arc(p.x,p.y,2,0,Math.PI*2);
+ctx.fillStyle="#ff4444";
+ctx.fill();
+});
 
-    requestAnimationFrame(animate);
+requestAnimationFrame(animate);
 }
 animate();
 
-window.addEventListener('resize', () => {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+// CLICK DISPOSITIVO → WHATSAPP
+document.querySelectorAll(".device").forEach(btn=>{
+btn.onclick=()=>{
+let dispositivo = btn.innerText;
+let msg = "Hola, quiero adquirir una modificación para mi teléfono " + dispositivo;
+let url = "https://wa.me/526151160719?text=" + encodeURIComponent(msg);
+window.location.href = url;
+};
 });
 
-// Vibración mini
-document.querySelectorAll('.link').forEach(link => {
-    link.addEventListener('touchstart', () => {
-        if(navigator.vibrate) navigator.vibrate(20);
-    });
+// COMPRA
+function buy(product){
+let msg="Hola quiero "+product;
+window.location.href="https://wa.me/526151160719?text="+encodeURIComponent(msg);
+}
+
+// SCROLL
+const observer=new IntersectionObserver(entries=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting){
+entry.target.classList.add("show");
+}
+});
+},{threshold:0.2});
+
+document.querySelectorAll(".card").forEach(card=>{
+observer.observe(card);
 });
 </script>
 
