@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -180,9 +181,8 @@ color:#777;
 
 <div class="container">
 
-<!-- 🔥 IMAGEN DESDE CARPETA -->
-<img src="img/20260322231831.png" class="avatar">
-
+<!-- 🔥 TU IMAGEN -->
+<img src="foto.jpg" class="avatar">
 <div class="name">Samirxx</div>
 
 <div class="subtitle">
@@ -212,6 +212,12 @@ Mods y configuraciones premium para mejorar tu rendimiento 🎯
 <div class="buy" onclick="buy('Modifax')">Comprar</div>
 </div>
 
+<div class="card">
+<p>1️⃣ Elige tu producto</p>
+<p>2️⃣ Selecciona tu dispositivo</p>
+<p>3️⃣ Te atiendo por WhatsApp</p>
+</div>
+
 <h3>Selecciona tu dispositivo 📱</h3>
 
 <div class="devices">
@@ -223,6 +229,12 @@ Mods y configuraciones premium para mejorar tu rendimiento 🎯
 <div class="device">Alcatel</div>
 </div>
 
+<div class="card">
+<p>📩 ¿No ves tu dispositivo? Te ayudo directamente</p>
+<p>🛠️ Compatible con iPhone y Android</p>
+<p>⚡ Atención rápida por WhatsApp</p>
+</div>
+
 <div class="footer">© 2026 Samirxx Store</div>
 
 </div>
@@ -230,10 +242,65 @@ Mods y configuraciones premium para mejorar tu rendimiento 🎯
 <a href="https://wa.me/526151160719" class="floating">💬</a>
 
 <script>
+const canvas=document.getElementById("canvas");
+const ctx=canvas.getContext("2d");
+
+function resize(){
+canvas.width=innerWidth;
+canvas.height=innerHeight;
+}
+resize();
+addEventListener("resize",resize);
+
+let particles=[];
+for(let i=0;i<70;i++){
+particles.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+dx:(Math.random()-0.5),
+dy:(Math.random()-0.5)
+});
+}
+
+function animate(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+particles.forEach(p=>{
+p.x+=p.dx;
+p.y+=p.dy;
+ctx.beginPath();
+ctx.arc(p.x,p.y,2,0,Math.PI*2);
+ctx.fillStyle="#ff4444";
+ctx.fill();
+});
+requestAnimationFrame(animate);
+}
+animate();
+
+document.querySelectorAll(".device").forEach(btn=>{
+btn.onclick=()=>{
+let dispositivo = btn.innerText;
+let msg = "Hola, quiero adquirir una modificación para mi teléfono " + dispositivo;
+let url = "https://wa.me/526151160719?text=" + encodeURIComponent(msg);
+window.location.href = url;
+};
+});
+
 function buy(product){
 let msg="Hola quiero "+product;
 window.location.href="https://wa.me/526151160719?text="+encodeURIComponent(msg);
 }
+
+const observer=new IntersectionObserver(entries=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting){
+entry.target.classList.add("show");
+}
+});
+},{threshold:0.2});
+
+document.querySelectorAll(".card").forEach(card=>{
+observer.observe(card);
+});
 </script>
 
 </body>
