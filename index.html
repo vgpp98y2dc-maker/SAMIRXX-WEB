@@ -37,10 +37,25 @@ backdrop-filter:blur(20px);
 
 /* AVATAR */
 .avatar{
-width:110px;
+width:150px;
 border-radius:50%;
 border:3px solid #ff4444;
-box-shadow:0 0 40px #ff0000, 0 0 80px rgba(255,0,0,0.5);
+}
+
+.neonAvatar{
+animation:avatarPulse 2s infinite alternate;
+margin-bottom:10px;
+}
+
+@keyframes avatarPulse{
+0%{
+box-shadow:0 0 20px #ff0000, 0 0 40px #ff0000;
+transform:scale(1);
+}
+100%{
+box-shadow:0 0 60px #ff0000, 0 0 100px #ff2a2a;
+transform:scale(1.05);
+}
 }
 
 .name{
@@ -180,8 +195,7 @@ color:#777;
 
 <div class="container">
 
-<!-- ✅ IMAGEN CORREGIDA - REEMPLAZA EL NOMBRE POR EL DE TU ARCHIVO -->
-<img src="img/20260322231831.jpg" class="avatar" alt="Avatar Samirxx">
+<img src="https://i.pinimg.com/originals/cd/95/f4/cd95f4d01d6b2631a4afd60599f227b7.jpg" class="avatar neonAvatar">
 
 <div class="name">Samirxx</div>
 
@@ -198,13 +212,15 @@ Mods y configuraciones premium para mejorar tu rendimiento 🎯
 <p>⚡ Servicio rápido y seguro</p>
 </div>
 
+<!-- ARCHIVO DIRECTO A WHATS -->
 <div class="card">
 <h3>👹Archivo👹</h3>
 <div>$10 USD</div>
 <p>Mejoras en tu jugabilidad</p>
-<div class="buy" onclick="buy('Archivo')">Comprar</div>
+<div class="buy" onclick="buyArchivo()">Comprar</div>
 </div>
 
+<!-- MODIFAX NORMAL -->
 <div class="card">
 <h3>Modifax</h3>
 <div>$5 USD</div>
@@ -233,7 +249,7 @@ Mods y configuraciones premium para mejorar tu rendimiento 🎯
 <p>📩 ¿No ves tu dispositivo? Te ayudo directamente</p>
 </div>
 
-<div class="footer">© 2026 Samirxx Store</div>
+<div class="footer">©️ 2026 Samirxx Store</div>
 
 </div>
 
@@ -275,20 +291,37 @@ requestAnimationFrame(animate);
 }
 animate();
 
-// botones
-document.querySelectorAll(".device").forEach(btn=>{
-btn.onclick=()=>{
-let dispositivo = btn.innerText;
-let msg = "Hola, quiero para " + dispositivo;
-let url = "https://wa.me/526151160719?text=" + encodeURIComponent(msg);
-window.location.href = url;
-};
-});
-
-function buy(product){
-let msg="Hola quiero "+product;
+// 🔥 ARCHIVO DIRECTO
+function buyArchivo(){
+let msg="Hola, quiero comprar el producto 👹Archivo👹";
 window.location.href="https://wa.me/526151160719?text="+encodeURIComponent(msg);
 }
+
+// SISTEMA NORMAL
+let selectedProduct="";
+let selectedDevice="";
+
+function buy(product){
+selectedProduct=product;
+alert("Seleccionaste: "+product);
+}
+
+document.querySelectorAll(".device").forEach(btn=>{
+btn.onclick=()=>{
+document.querySelectorAll(".device").forEach(b=>b.style.background="#111");
+btn.style.background="#ff2a2a";
+
+selectedDevice=btn.innerText;
+
+if(selectedProduct!==""){
+let msg="Hola, quiero comprar:\n";
+msg+="🛒 Producto: "+selectedProduct+"\n";
+msg+="📱 Dispositivo: "+selectedDevice;
+
+window.location.href="https://wa.me/526151160719?text="+encodeURIComponent(msg);
+}
+};
+});
 
 // animaciones
 const observer=new IntersectionObserver(entries=>{
